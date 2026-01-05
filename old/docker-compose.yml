@@ -1,0 +1,95 @@
+services:
+  mariadb:
+    image: mariadb:10.11
+    container_name: openemr_mariadb
+    restart: unless-stopped
+    command: ["--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci"]
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - mariadb_data:/var/lib/mysql
+      # DB views (external read interface) loaded at DB init time
+      - ./init/dbviews.sql:/docker-entrypoint-initdb.d/20_dbviews.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-u${MYSQL_USER}", "-p${MYSQL_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+
+  openemr:
+    image: openemr/openemr:7.0.2
+    container_name: openemr_app
+    restart: unless-stopped
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    ports:
+      - "${OPENEMR_HTTP_PORT:-8080}:80"
+      - "${OPENEMR_HTTPS_PORT:-8443}:443"
+    environment:
+      MYSQL_HOST: mariadb
+      MYSQL_ROOT_PASS: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASS: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      OE_USER: ${OPENEMR_ADMIN_USER:-admin}
+      OE_PASS: ${OPENEMR_ADMIN_PASS:-pass}
+    volumes:
+      - openemr_sites:/var/www/localhost/htdocs/openemr/sites
+      - openemr_logs:/var/log
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://127.0.0.1/interface/login/login.php >/dev/null || exit 1"]
+      interval: 20s
+      timeout: 10s
+      retries: 30
+
+  # One-time synthetic dataset seeding (50–100 patients)
+  seed:
+    image: python:3.12-slim
+    container_name: openemr_seed
+    depends_on:
+      openemr:
+        condition: service_healthy
+    environment:
+      DB_HOST: mariadb
+      DB_PORT: "3306"
+      DB_NAME: ${MYSQL_DATABASE}
+      DB_USER: ${MYSQL_USER}
+      DB_PASSWORD: ${MYSQL_PASSWORD}
+      SEED_PATIENTS: ${SEED_PATIENTS:-80}
+      RANDOM_SEED: ${RANDOM_SEED:-587}
+    volumes:
+      - ./init:/app/init:ro
+    working_dir: /app
+    command: ["bash", "-lc", "pip install --no-cache-dir pymysql faker && python init/seed_patients.py"]
+    restart: "no"
+
+  # Basic audit export (DB audit table -> JSONL file) for student tools
+  audit_exporter:
+    image: python:3.12-slim
+    container_name: openemr_audit_exporter
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    environment:
+      DB_HOST: mariadb
+      DB_PORT: "3306"
+      DB_NAME: ${MYSQL_DATABASE}
+      DB_USER: ${MYSQL_USER}
+      DB_PASSWORD: ${MYSQL_PASSWORD}
+      EXPORT_INTERVAL_SEC: ${EXPORT_INTERVAL_SEC:-30}
+    volumes:
+      - ./audit:/app/audit:ro
+      - audit_exports:/exports
+    working_dir: /app
+    command: ["bash", "-lc", "pip install --no-cache-dir pymysql && python audit/export_audit_jsonl.py --out /exports/audit.jsonl"]
+    restart: unless-stopped
+
+volumes:
+  mariadb_data:
+  openemr_sites:
+  openemr_logs:
+  audit_exports:
