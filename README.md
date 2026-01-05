@@ -150,9 +150,9 @@ Login credentials: admin / pass
 
 ## 10) Log of the system
 
-docker logs openemr_app --tail=100
+    docker logs openemr_app --tail=100
 
-docker logs openemr_mariadb --tail=100
+    docker logs openemr_mariadb --tail=100
 
 
 ### A. FHIR API
