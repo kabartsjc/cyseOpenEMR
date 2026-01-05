@@ -136,11 +136,11 @@ If something in the system appears confusing or unintuitive, assume:
       - openemr_app healthy
 ---
 
-## 5. Accessing the System
+## 9) Accessing the System
 
 Open a browser and navigate to:
 
-http://localhost:8080
+HTTP: http://localhost:8080
 
 HTTPS: https://localhost:8443
 
@@ -148,7 +148,12 @@ Login credentials: admin / pass
 
 ---
 
-## 6. Key Interfaces for Your Project
+## 10) Log of the system
+
+docker logs openemr_app --tail=100
+
+docker logs openemr_mariadb --tail=100
+
 
 ### A. FHIR API
 
