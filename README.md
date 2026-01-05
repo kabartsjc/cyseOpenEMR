@@ -123,10 +123,17 @@ If something in the system appears confusing or unintuitive, assume:
     - wait few seconds and reopen the vscode
 
 
-8) Run the Docker compose commands
+### 8) Run the Docker compose commands
     
      docker compose up -d
 
+     docker compose ps
+
+     You must see: 
+
+      - openemr_mariadb healthy
+
+      - openemr_app healthy
 ---
 
 ## 5. Accessing the System
