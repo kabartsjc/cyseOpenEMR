@@ -21,3 +21,18 @@
 
     git clone https://github.com/kabartsjc/cyseOpenEMR.git
 
+5) Update the env variables
+
+    cp .env.example .env
+
+6) Enter in the Docker Windows configuration 
+
+    - Click on Settings --> Resources → WSL Integration --> Enable integration with my default WSL distro --> Ubuntu
+    - Restart Docker
+
+
+7) Run the Docker compose commands
+    docker compose up -d
+    docker compose run --rm seed
+
+7) 
