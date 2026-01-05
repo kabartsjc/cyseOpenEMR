@@ -124,19 +124,26 @@ If something in the system appears confusing or unintuitive, assume:
 
 
 ### 8) Run the Docker compose commands
+
+      docker compose down -v --remove-orphans
+      docker container prune -f
+      docker volume prune -f
+      docker image prune -a -f
+  
+      docker compose up -d
     
-     docker compose up -d
+      docker ps # wait for all the services is healthy
 
-     docker compose ps
+      
+      You must see: 
 
-     You must see: 
+          - openemr_mariadb healthy
 
-      - openemr_mariadb healthy
-
-      - openemr_app healthy
+          - openemr_app healthy
+      
 ---
 
-## 9) Accessing the System
+### 9) Accessing the System
 
 Open a browser and navigate to:
 
@@ -148,76 +155,20 @@ Login credentials: admin / pass
 
 ---
 
-## 10) Log of the system
+# OpenEMR Minimal Working Setup
 
-    docker logs openemr_app --tail=100
+Goal
 
-    docker logs openemr_mariadb --tail=100
+- 2 Clinics (Facilities)
 
+- 2 Doctors (Providers + Login users)
 
-### A. FHIR API
+- 5 Patients
 
-FHIR provides standardized access to clinical data.
+Appointments visible in the Calendar
 
-Example:
-http://localhost:8080/fhir/Patient
+- Starting point:
 
-You can use FHIR to analyze data exposure, assess privacy and interoperability risks, and build read-only analytics tools.
+- Fresh OpenEMR
 
-### B. Audit Logs
-
-Audit events are exported outside OpenEMR and record:
-
-- User logins
-- Access to patient records
-- System actions
-- Timestamps and roles
-
-Audit logs are central to security monitoring, misuse detection, and governance.
-
-### C. Read-Only Database Views
-
-Some read-only database views are exposed for analytics purposes.
-
-You may query aggregated or observational data, but you may not write to the database or alter clinical data.
-
----
-
-## 7. Project Scope and Creativity
-
-The project scope is intentionally open-ended.
-
-Illustrative examples include:
-
-- Detecting anomalous access to patient records
-- Analyzing privacy risks across workflows
-- Identifying role misuse or privilege creep
-- Governance dashboards for compliance officers
-- Socio-technical risk analysis
-- Trust and explainability assessment
-
-You are encouraged to propose your own innovative idea.
-
----
-
-## 8. Proof-of-Concept Expectations
-
-Your PoC should:
-
-- Clearly describe the problem being addressed
-- Explain why the problem matters
-- Show how your tool consumes system data and produces insight
-- Demonstrate feasibility
-- Discuss assumptions, trade-offs, and limitations
-
-Reasoning and system understanding matter more than code volume.
-
----
-
-## 9. Final Reminder
-
-This testbed is not about breaking OpenEMR.
-
-It is about understanding complex socio-technical systems and designing responsible, realistic cybersecurity solutions.
-
-Approach this project as if your solution could one day be evaluated for deployment in a real hospital.
+- Only admin user exists

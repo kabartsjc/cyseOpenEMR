@@ -17,6 +17,23 @@ services:
       timeout: 5s
       retries: 20
 
+  seed:
+    image: python:3.12-slim
+    depends_on:
+      - mariadb
+    volumes:
+      - ./scripts:/scripts
+    environment:
+      DB_HOST: mariadb
+      DB_USER: openemr
+      DB_PASSWORD: openemrpass
+      DB_NAME: openemr
+    command: >
+      sh -c "
+      pip install pymysql faker &&
+      python /scripts/seed_clinic_doctors_patients.py
+      "
+
   openemr:
     image: openemr/openemr:7.0.2
     container_name: openemr_app
