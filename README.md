@@ -2,7 +2,7 @@
 
 1) Prepare the WSL to run the project. In the terminal run this command:
 
-wsl --install -d Ubuntu
+    wsl --install -d Ubuntu
 
 2) Define Ubuntu as the main distribution
 
