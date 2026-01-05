@@ -30,8 +30,26 @@
     - Click on Settings --> Resources → WSL Integration --> Enable integration with my default WSL distro --> Ubuntu
     - Restart Docker
 
+    - check if the changes work
+        
+        docker version
+        
+        docker compose version
 
-7) Run the Docker compose commands
+    - Add the user to have permissions in Docker
+
+        sudo usermod -aG docker $USER
+
+7) In the Windows terminal, run these commands
+
+    wsl --shutdown
+
+    wsl
+
+    - wait few seconds and reopen the vscode
+
+
+8) Run the Docker compose commands
     
     docker compose up -d
     
