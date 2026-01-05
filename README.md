@@ -308,12 +308,36 @@ Click Save for each.
 
 Menu Option: Calendar
 
-- Select these options
+Before creating appointments:
 
-    Billing Location
-    
-    Accepts Assignment
+    On the left panel
 
-    Service Location
+        Check:
 
-    Primary Business Entity
+        ☑ doctor1
+
+        ☑ doctor2
+
+        Select the correct Facility
+
+        Switch to Day or Week view
+
+    Create an appointment
+
+    Click on a time slot
+
+    Select:
+
+      Patient
+
+      Provider (doctor1 or doctor2)
+
+      Facility
+
+      Category: Office Visit
+
+  Click Save
+
+Repeat until all 5 patients have appointments.
+
+✔ Appointments appear immediately
