@@ -341,3 +341,8 @@ Before creating appointments:
 Repeat until all 5 patients have appointments.
 
 ✔ Appointments appear immediately
+
+
+## 6) More information
+
+https://www.open-emr.org/wiki/index.php/OpenEMR_7.0.1_Users_Guide
