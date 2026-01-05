@@ -193,3 +193,49 @@ Create two facilities:
 
 Click Save for each.
 
+
+## 2) Create the Doctors (Users + Providers)
+
+⚠️ Doctors must be users, not just database entries.
+
+Menu Option: Admin --> Users
+
+### Doctor 1
+
+  - Username: doctor1
+
+  - Password: Doctor@2026
+
+  - Role: Clinician
+
+  - First Name / Last Name
+
+  - Check these boxes:
+
+        ☑ Provider
+
+        ☑ Calendar
+
+        ☑ Active
+
+Click Save
+
+### Doctor 2
+
+    - Username: doctor2
+
+    - Password: Doctor@2026
+
+    - Role: Clinician
+
+    - Check:
+
+          ☑ Provider
+
+          ☑ Calendar
+
+          ☑ Active
+
+    Click Save
+
+
