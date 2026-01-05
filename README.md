@@ -6,18 +6,18 @@
 
 2) Define Ubuntu as the main distribution
 
-wsl --set-default Ubuntu
+    wsl --set-default Ubuntu
 
-wsl --list --verbose
+    wsl --list --verbose
 
 
 3) In the VS Code
 
-- Type Ctrl + Shift + P
+    - Type Ctrl + Shift + P
 
-- Select  “WSL: Connect to WSL”
+    - Select  “WSL: Connect to WSL”
 
 4) In the wsl shell, clone the repo
 
-git clone https://github.com/kabartsjc/cyseOpenEMR.git
+    git clone https://github.com/kabartsjc/cyseOpenEMR.git
 
