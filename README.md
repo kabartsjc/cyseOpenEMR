@@ -142,6 +142,8 @@ Open a browser and navigate to:
 
 http://localhost:8080
 
+HTTPS: https://localhost:8443
+
 Login credentials: admin / pass
 
 ---
