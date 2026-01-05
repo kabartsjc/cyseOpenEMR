@@ -11,9 +11,13 @@ wsl --set-default Ubuntu
 wsl --list --verbose
 
 
-3) AIn the VS Code
+3) In the VS Code
 
 - Type Ctrl + Shift + P
 
 - Select  “WSL: Connect to WSL”
+
+4) In the wsl shell, clone the repo
+
+git clone https://github.com/kabartsjc/cyseOpenEMR.git
 
