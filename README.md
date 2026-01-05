@@ -32,7 +32,9 @@
 
 
 7) Run the Docker compose commands
+    
     docker compose up -d
+    
     docker compose run --rm seed
 
 7) 
