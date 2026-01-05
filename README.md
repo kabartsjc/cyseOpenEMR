@@ -172,3 +172,24 @@ Appointments visible in the Calendar
 - Fresh OpenEMR
 
 - Only admin user exists
+
+## 1) Create the Clinics (Facilities)
+
+Menu Option: Admin --> Clinic --> Facilities
+
+Create two facilities:
+
+### Facility 1
+
+  - Name: SYN Clinic 1
+
+  - Address: anything
+
+  - Country / State: select something
+
+### Facility 2
+
+  - Name: SYN Clinic 2
+
+Click Save for each.
+
