@@ -187,9 +187,20 @@ Create two facilities:
 
   - Country / State: select something
 
+  - Select these options
+
+    Billing Location
+    
+    Accepts Assignment
+
+    Service Location
+
+    Primary Business Entity
+
 ### Facility 2
 
   - Name: SYN Clinic 2
+
 
 Click Save for each.
 
@@ -197,6 +208,8 @@ Click Save for each.
 ## 2) Create the Doctors (Users + Providers)
 
 ⚠️ Doctors must be users, not just database entries.
+
+⚠️ Remember field Your Password is the admin password (pass).
 
 Menu Option: Admin --> Users
 
@@ -206,7 +219,9 @@ Menu Option: Admin --> Users
 
   - Password: Doctor@2026
 
-  - Role: Clinician
+  - Provider Type: General Physician
+
+  - Access Control: Clinicians
 
   - First Name / Last Name
 
@@ -226,8 +241,10 @@ Click Save
 
     - Password: Doctor@2026
 
-    - Role: Clinician
+    - Provider Type: General Physician
 
+    - Access Control: Clinicians
+    
     - Check:
 
           ☑ Provider
@@ -239,3 +256,64 @@ Click Save
     Click Save
 
 
+## 3) Link Doctors to Clinics
+
+Menu Option: Admin → Users → View Facility Specific User Information
+
+### For doctor1
+
+    Click doctor1
+
+    For SYN Clinic 1:
+
+    Provider Role: Physical Therapist
+    Provider Specialty: General Practice
+
+Save
+
+    Repeat for:
+
+    doctor1 → SYN Clinic 2
+
+### For doctor2
+
+Repeat the same steps for:
+
+      SYN Clinic 1
+
+      SYN Clinic 2
+
+✔ Doctors are now real providers
+✔ Calendar will finally work
+
+
+## 4) Create Patients (5 patients)
+
+Menu Option: Patient → New/Search
+
+Create 5 patients with only:
+
+    First Name
+
+    Last Name
+
+    Date of Birth
+
+    Sex
+
+Click Save for each.
+
+
+## 5) Create Appointments
+
+Menu Option: Calendar
+
+- Select these options
+
+    Billing Location
+    
+    Accepts Assignment
+
+    Service Location
+
+    Primary Business Entity
